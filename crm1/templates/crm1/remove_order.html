@@ -1,0 +1,22 @@
+{% extends 'crm1/base.html' %}
+{% block content%}
+
+
+<div class= "row">
+    <div class= "col-md-5">
+        <div class="card card-body">
+            <form method="post" action="{% url 'delete_order' item.id %}">
+                {% csrf_token %}
+                
+                Are you sure you want to delete {{item}} ?
+                <a href="{% url 'home'%}"><input type ='button' value ='Return'></a> 
+                <input type='submit' value ='Confirm'/>
+            
+             </form>  
+        </div>
+    </div>
+</div>
+ 
+
+
+{% endblock %}
