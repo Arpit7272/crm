@@ -3,29 +3,53 @@ from .models import *
 from .forms import *
 from .filters import *
 from django.contrib import messages
-
-
+from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
 def signin(request):
-    context ={}
-    return render(request,'crm1/signin.html',context)
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)   
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+
+            else:
+                messages.info(request, "Username or Password is incorrect")
+
+        context ={}
+        return render(request,'crm1/signin.html',context)
+
+
+def signout(request):
+    logout(request)
+    return redirect("login")
 
 def signup(request):
-    form = CreateUserForm()
-    if request.method == "POST":
-        form= CreateUserForm(request.POST)
-        
-        if form.is_valid():
-            form.save()
-            user= form.cleaned_data.get("username")
-            messages.success(request, user+ " Successfully created")
-            return redirect("login")
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        form = CreateUserForm()
+        if request.method == "POST":
+            form = CreateUserForm(request.POST)
 
-    context={"form":form}
-    return render(request,'crm1/signup.html',context)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get("username")
+                messages.success(request, user + " Successfully created")
+                return redirect("login")
 
+        context = {"form": form}
+        return render(request, 'crm1/signup.html', context)
+
+@login_required(login_url='login')
 def dashboard(request):
 
     customers = Customer.objects.all()
@@ -42,13 +66,13 @@ def dashboard(request):
 
     return render(request, 'crm1/dashboard.html', context)
 
-
+@login_required(login_url='login')
 def product(request):
 
     products = Product.objects.all()
     return render(request, 'crm1/product.html', {"products": products})
 
-
+@login_required(login_url='login')
 def customer(request, pk):
 
     req_customer = Customer.objects.get(id=pk)
@@ -61,7 +85,7 @@ def customer(request, pk):
                 "orderfilter":orderfilter}
     return render(request, 'crm1/customer.html', context)
 
-
+@login_required(login_url='login')
 def create_order(request,pk):
     customer=Customer.objects.get(id=pk) 
     order = OrderForm(initial={'customer':customer})
@@ -74,7 +98,7 @@ def create_order(request,pk):
     context = {"form": order}
     return render(request, 'crm1/create_order.html', context)
 
-
+@login_required(login_url='login')
 def update_order(request, pk):
     order = Order.objects.get(id=pk)
     order_form = OrderForm(instance=order)
@@ -87,7 +111,7 @@ def update_order(request, pk):
     context = {"form": order_form}
 
     return render(request, 'crm1/update_order.html', context)
-
+@login_required(login_url='login')
 def remove_order(request,pk):
     order= Order.objects.get(id=pk)
 

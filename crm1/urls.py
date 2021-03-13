@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.dashboard, name='home'),
     path('login/', views.signin, name = 'login'),
+    path('logout/',views.signout, name= 'logout'),
     path('signup/', views.signup, name = 'register'),
     re_path('customer/(?P<pk>\d+)$', views.customer, name='customer'),
     path('product/', views.product, name='product'),
