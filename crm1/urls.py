@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/',views.signout, name= 'logout'),
     path('user/',views.user_page, name = 'user_page'),
     path('signup/', views.signup, name = 'register'),
+    path('orders/',views.orders, name = 'order'),
     re_path('customer/(?P<pk>\d+)$', views.customer, name='customer'),
     path('account_setting/',views.account_setting, name='account_setting'),
     path('product/', views.product, name='product'),

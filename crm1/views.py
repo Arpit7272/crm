@@ -162,3 +162,15 @@ def account_setting(request):
     context ={'form': form}
     return render(request, 'crm1/account_setting.html', context)
 
+@login_required(login_url='login')
+@allowed_users('admin')
+def orders(request):
+    orders = Order.objects.all()
+    orderfilter = OrderFilterAll(request.GET , queryset=orders)
+    orders = orderfilter.qs
+    context ={'orders':orders,
+            'orderfilter':orderfilter,
+            }
+
+    return render(request, 'crm1/orders.html', context)
+
