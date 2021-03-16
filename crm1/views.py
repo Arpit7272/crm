@@ -51,19 +51,21 @@ def signup(request):
     return render(request, 'crm1/signup.html', context)
 
 
-@login_required(login_url='login')
-@allowed_users('customer')
-def user_page(request):
-    orders= request.user.customer.order_set.all()
-    total_orders = orders.count()
-    pending_orders = orders.filter(status="Pending").count()
-    delivered_orders = orders.filter(status="Delivered").count()
-    context = {'order': orders,
-                "total": total_orders,
-               "pending": pending_orders,
-               "delivered": delivered_orders,
-                }
-    return render(request, 'crm1/user_details.html', context)
+# <--- Updated with Customer data -->
+
+# @login_required(login_url='login')
+# @allowed_users('customer')
+# def user_page(request):
+#     orders= request.user.customer.order_set.all()
+#     total_orders = orders.count()
+#     pending_orders = orders.filter(status="Pending").count()
+#     delivered_orders = orders.filter(status="Delivered").count()
+#     context = {'order': orders,
+#                 "total": total_orders,
+#                "pending": pending_orders,
+#                "delivered": delivered_orders,
+#                 }
+#     return render(request, 'crm1/user_details.html', context)
 
 
 @login_required(login_url='login')
