@@ -55,8 +55,10 @@
 					<th>Category</th>
 					<th>Date Created</th>
 					<th>Status</th>
+					{% if request.user.is_staff %}
 					<th>Update</th>
 					<th>Remove</th>
+					{% endif %}
 				</tr>
 				{% for orders in order %}
 				<tr>
@@ -64,8 +66,10 @@
 					<td>{{orders.product.category}}</td>
 					<td>{{orders.date_created}}</td>
 					<td>{{orders.status}}</td>
+					{% if request.user.is_staff %}
 					<td><a href="{% url 'update_order' orders.id %}" class="btn btn-sm btn-info">Update</a></td>
 					<td><a href="{% url 'delete_order' orders.id %}" class="btn btn-sm btn-danger">Remove</a></td>
+					{% endif %}
 				</tr>
 				{% endfor %}
 			</table>
