@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # django filter
     'django_filters',
-    'crm1',
+    'crm1.apps.Crm1Config',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +125,4 @@ STATICFILES_DIRS = [
                 os.path.join(BASE_DIR,'crm1/static'),
              ]
 MEDIA_URL = '/media/'
+MEDIA_ROOT= os.path.join(BASE_DIR,'crm1/static/media')

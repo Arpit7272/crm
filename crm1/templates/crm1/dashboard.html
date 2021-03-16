@@ -8,12 +8,12 @@
     <div class="col-sm-5">
         <h4>Customer</h4>
         <div class="card card-body">
-            <a href="#" class="btn btn-primary btn-lg btn-block">Create Customer</a>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg btn-block">Create Customer</a>
             <table class="table table-sm">
                 <tr>
                     <th></th>
                     <th>Customer</th>
-                    <th>Order</th>
+                    <th>Phone</th>
                 </tr>
                 {%for customer in customers%}
                 <tr>
@@ -38,7 +38,7 @@
                     <th>Update</th>
                     <th>Remove</th>
                 </tr>
-                {% for order in orders %}
+                {% for order in order_latest %}
                 <tr>
                     <td>{{order.product}}</td>
                     <td>{{order.date_created}}</td>
