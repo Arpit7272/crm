@@ -23,9 +23,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'crm1/templates')
 SECRET_KEY = 'n=kz$v!=h=!pw@3v*2qw2ki!f%%qu^@!)d9_u_%z4j++63w7sc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", 'customer-related-data.herokuapp.com']
 
 
 # Application definition
