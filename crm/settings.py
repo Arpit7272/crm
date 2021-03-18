@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # django filter
     'django_filters',
     'crm1.apps.Crm1Config',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 MIDDLEWARE = [
