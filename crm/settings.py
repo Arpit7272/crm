@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # django filter
     'django_filters',
     'crm1.apps.Crm1Config',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
 ]
 
 MIDDLEWARE = [
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'crm.urls'
