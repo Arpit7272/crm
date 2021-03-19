@@ -176,3 +176,15 @@ def orders(request):
 
     return render(request, 'crm1/orders.html', context)
 
+
+@login_required(login_url='login')
+@allowed_users('admin')
+def add_product(request):
+    form = ProductForm()
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product')
+    context ={'form':form}
+    return render(request,'crm1/add_product.html',context)

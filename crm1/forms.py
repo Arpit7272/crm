@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Order, Customer
+from .models import Order, Customer, Product
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -20,9 +20,10 @@ class CustomerForm(ModelForm):
         exclude = ['user']
 
 
-class CreateUserForm(UserCreationForm):
+class ProductForm(ModelForm):
 
     class Meta:
-        
-        model = User
-        fields =['username','email', 'password1','password2']
+        model= Product
+        fields = '__all__'
+        exclude=['date_created','tags']
+
