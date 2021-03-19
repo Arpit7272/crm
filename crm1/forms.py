@@ -25,5 +25,5 @@ class ProductForm(ModelForm):
     class Meta:
         model= Product
         fields = '__all__'
-        exclude=['date_created']
+        exclude=['date_created','tags']
 
