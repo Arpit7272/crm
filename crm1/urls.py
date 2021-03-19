@@ -12,6 +12,7 @@ urlpatterns = [
     re_path('customer/(?P<pk>\d+)$', views.customer, name='customer'),
     path('account_setting/',views.account_setting, name='account_setting'),
     path('product/', views.product, name='product'),
+    path('add_product/',views.add_product, name = 'add_product'),
     re_path('create_order/(?P<pk>\d+)$', views.create_order, name='create_order'),
     re_path('update_order/(?P<pk>\d+)$', views.update_order, name='update_order'),
     re_path('delete_order/(?P<pk>\d+)$', views.remove_order, name='delete_order'),
