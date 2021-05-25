@@ -10,6 +10,10 @@ class OrderForm(ModelForm):
         model = Order
         fields = '__all__'
 
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields=['username', 'email','password1','password2']
 
 class CustomerForm(ModelForm):
 
@@ -25,5 +29,5 @@ class ProductForm(ModelForm):
     class Meta:
         model= Product
         fields = '__all__'
-        exclude=['date_created','tags']
+        exclude=['date_created','tags'] 
 
