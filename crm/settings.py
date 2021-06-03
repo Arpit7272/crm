@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # django filter
     'django_filters',
     'crm1.apps.Crm1Config',
+    'storages',
     
 ]
 
@@ -80,8 +81,13 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'crm_db',
+        'HOST':'crmdb.clwq5lqsykbe.ap-south-1.rds.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'arpitdb',
+        'PASSWORD': 'Freak7272',
+
     }
 }
 
@@ -129,3 +135,16 @@ STATICFILES_DIRS = [
              ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT= os.path.join(BASE_DIR,'static/media')
+
+
+#S3 bucket configuration
+AWS_ACCESS_KEY_ID = 'AKIAS4O4AXLEIJQKKO6S'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME ='arpitcrmbucket'
+
+#Defaults
+AWS_DEFAULT_ACL = 'public-read'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+AWS_S3_REGION_NAME = "ap-south-1"
