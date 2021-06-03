@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config,Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +21,11 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'crm1/templates')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'n=kz$v!=h=!pw@3v*2qw2ki!f%%qu^@!)d9_u_%z4j++63w7sc'
-
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ["127.0.0.1", 'customer-related-data.herokuapp.com']
+ALLOWED_HOSTS = ["127.0.0.1",]
 
 
 # Application definition
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django_filters',
     'crm1.apps.Crm1Config',
     'storages',
-    
 ]
 
 MIDDLEWARE = [
@@ -82,11 +81,11 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crm_db',
-        'HOST':'crmdb.clwq5lqsykbe.ap-south-1.rds.amazonaws.com',
+        'NAME': config('NAME'),
+        'HOST':config('HOST'),
         'PORT': '5432',
-        'USER': 'arpitdb',
-        'PASSWORD': 'Freak7272',
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
 
     }
 }
@@ -138,9 +137,9 @@ MEDIA_ROOT= os.path.join(BASE_DIR,'static/media')
 
 
 #S3 bucket configuration
-AWS_ACCESS_KEY_ID = 'AKIAS4O4AXLEIJQKKO6S'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME ='arpitcrmbucket'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME =config('AWS_STORAGE_BUCKET_NAME')
 
 #Defaults
 AWS_DEFAULT_ACL = 'public-read'
